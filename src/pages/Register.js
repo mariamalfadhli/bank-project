@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../api/auth";
-
 const Register = () => {
   const [userInfo, setUserInfo] = useState({});
+
+  const { mutate: regfn } = useMutation({
+    mutationFn: () => {
+      console.log("first", userInfo);
+      register(userInfo);
+    },
+  });
 
   const handleChange = (e) => {
     if (e.target.name === "image") {
@@ -13,19 +19,10 @@ const Register = () => {
     }
   };
 
-  const mutation = useMutation({
-    mutationFn: register(userInfo),
-  });
-
-  const { mutate: regfn } = useMutation({
-    mutationFn: register(userInfo),
-  });
-
   const handleFormSubmit = (e) => {
-    regfn();
     e.preventDefault();
+    regfn();
   };
-
   return (
     <div className="bg-gray-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
@@ -36,33 +33,18 @@ const Register = () => {
               htmlFor="name"
               className="block text-white text-sm font-medium mb-2"
             >
-              Name
+              username
             </label>
             <input
               type="text"
               id="name"
-              name="name"
+              name="username"
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-white text-sm font-medium mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+
           <div className="mb-4">
             <label
               htmlFor="password"

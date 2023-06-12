@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 
 const login = async (userInfo) => {
   try {
-    const { data } = await instance.post("/auth/login", userInfo);
+    const { data } = await instance.post("/auth/v3/login", userInfo);
     return data;
   } catch (error) {
     console.log(error);
@@ -12,12 +12,16 @@ const login = async (userInfo) => {
 
 const register = async (userInfo) => {
   try {
+    console.log("auth.js", userInfo);
     const formData = new FormData();
     for (const key in userInfo) formData.append(key, userInfo[key]);
-    const { data } = await instance.post("/auth/register", formData);
-    storeToken(data.token);
+    const { data } = await instance.post("/auth/v3/register", formData);
+    console.log(data);
+    storeToken(data.access);
     return data;
   } catch (error) {
+    console.log("err");
+
     console.log(error);
   }
 };
@@ -46,7 +50,7 @@ const logout = () => {
 
 const me = async () => {
   try {
-    const { data } = await instance.get("/auth/me");
+    const { data } = await instance.get("/auth/v3/me");
     return data;
   } catch (error) {
     console.log(error);
@@ -55,7 +59,7 @@ const me = async () => {
 
 const getAllUsers = async () => {
   try {
-    const { data } = await instance.get("/auth/users");
+    const { data } = await instance.get("/auth/v3/users");
     return data;
   } catch (error) {
     console.log(error);

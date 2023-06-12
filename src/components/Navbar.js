@@ -12,16 +12,22 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to="Register"
+          to="register"
           className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
         >
           Register
         </NavLink>
         <NavLink
-          to="Login"
+          to="login"
           className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
         >
           Login
+        </NavLink>
+        <NavLink
+          to="/users"
+          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+        >
+          Users
         </NavLink>
       </div>
     </div>

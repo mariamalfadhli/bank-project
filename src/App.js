@@ -8,6 +8,7 @@ import User from "./pages/Users";
 import UserContext from "./context/UserContext";
 import { useEffect, useState } from "react";
 import { checkToken } from "./api/auth";
+import Reg from "./pages/Reg";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -20,9 +21,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="Register" element={<Register />} />
-          <Route path="Login" element={<Login />} />
-          <Route path="Users" element={<User />} />
+          <Route path="/register" element={<Reg />} />
+          <Route path="login" element={<Login />} />
+          <Route path="users" element={<User />} />
         </Routes>
       </div>
     </UserContext.Provider>
